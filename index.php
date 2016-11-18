@@ -1,42 +1,65 @@
-
 <!DOCTYPE html>
 <html>
-	<head>
-	  <meta charset="UTF-8"/>
-	  <link href="css/bootstrap.min.css" rel="stylesheet">
-	  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<!-- <script type="text/javascript" src="js/javas.js"></script> -->
+<head>
 
-	 
-	</head>
-	<body >
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 
-		<!-- <form method="GET" onsubmit="testMail()">
-		    <p>
-		        text : <input type="text" id="text" />
-		       
-		        <input type="submit" name="mMail" id="mail" value="envoyer"  />
-		    </p>
-	    </form> -->
 
-	<script>
-		/*function testMail(){
-			$.get('send-ajax-data.php',{
-				tMail : $('#text').val(),
+	<title>Explorateur de fichier Groupe 7</title>
 
-			})
-		    .done(function(data) {
-		    	
 
-		        alert(data);
-		    })
-		    .fail(function(data) {
-		        alert('Error: ' + data);
-		    });
-		}*/
+
+</head>
+
+
+<body>
+	<header class="container">
+
+		<div class="col-xs-1">
+
+
+			<button id="test" type="button" class="btn btn-outline-info " onclick="retourParent();"> <i class="glyphicon glyphicon-menu-up"></i></button>
+		</div>
+		<div class="col-xs-11">
+			<article >
+
+
+
+
+			</article>
+
+
+
+		</div>
+
+	</header>
+
+
+	<section class="container" id="explorer">
+
+		<article class="col-xs-3"></article>
+		<article class="col-xs-3"></article>
+		<article class="col-xs-3"></article>
+		<article class="col-xs-3"></article>
+		<article class="col-xs-3"></article>
+
+
+	</section>
+
+<footer>
 	
+
+</footer>
+
+</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/java.js"></script>
+	<script type="text/javascript">
+		firstInit();
 	</script>
-	</body>
+
 </html>
