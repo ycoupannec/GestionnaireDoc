@@ -37,22 +37,29 @@
 				while(false !== ($fichier = readdir($dossier)))
 				{	
 
-					if($fichier != '.' && $fichier != '..')
+						if($fichier != '.' && $fichier != '..')
 					{
 
 
 						if (strpos($fichier,".")===false){
-								echo '<article class="col-xs-3" onclick="OpenDoc(this)" id="' . $fichier . '"><div >' . $fichier . '</div></article>';	
+								echo '<article class="col-xs-6 col-md-3" onclick="OpenDoc(this)" id="' . $fichier . '"><div class="glyphicon glyphicon-folder-close" ><p class="filename" >' . $fichier . '</div></article>';	
 							}else {
-								echo '<article class="col-xs-3"><a href="' . $fichier . '" download=' . $fichier . '>' . $fichier . '</a></article>';	
-								
+								$stat=stat( realpath ($param.'/'.$fichier));
+
+								echo '<article class="col-xs-6 col-md-3"><a class="glyphicon glyphicon-file" href="' .$param.'/'. $fichier. '" download=' . $fichier . '><p class="filename" >' . $fichier.'' ;	
+								if (!$stat){
+									echo ' Appel à stat() a échoué...';
+								}else{
+									echo '<div class="infoFichier"> Modif. :'.date ("F d Y H:i:s.", $stat["mtime"]).'</br>Taille. :'.$stat["size"].' octets';
+								}
+								echo'</div></p></a></article>';
 							}
 					}	 
 
 				}
 				closedir($dossier);
 			}else{
-				echo'Le dossier n\'a pas pu être ouvert.';
+				echo'Le dossier n\'a pas pu être ouvert.'; 
 				
 			}
 
@@ -83,10 +90,17 @@
 
 
 						if (strpos($fichier,".")===false){
-								echo '<article class="col-xs-3" onclick="OpenDoc(this)" id="' . $fichier . '"><div >' . $fichier . '</div></article>';	
+								echo '<article class="col-xs-6 col-md-3" onclick="OpenDoc(this)" id="' . $fichier . '"><div class="glyphicon glyphicon-folder-close" ><p class="filename" >' . $fichier . '</div></article>';	
 							}else {
-								echo '<article class="col-xs-3"><a href="' . realpath ($fichier). '" download=' . $fichier . '>' . $fichier . '</a></article>';	
-								
+								$stat=stat( realpath ($param.'/'.$fichier));
+
+								echo '<article class="col-xs-6 col-md-3"><a class="glyphicon glyphicon-file" href="' .$param.'/'. $fichier. '" download=' . $fichier . '><p class="filename" >' . $fichier.'' ;	
+								if (!$stat){
+									echo ' Appel à stat() a échoué...';
+								}else{
+									echo '<div class="infoFichier"> Modif. :'.date ("F d Y H:i:s.", $stat["mtime"]).'</br>Taille. :'.$stat["size"].' octets';
+								}
+								echo'</div></p></a></article>';
 							}
 					}	 
 
@@ -102,6 +116,56 @@
 			# code...
 			break;
 		
+		case 3:
+			
+			$champ = explode("/", $param);
+			$lienChemin="";
+			foreach ($champ as $value) {
+				$lienChemin.=$value."/";
+			    echo '<a class="breadcrumb-item" onclick="retourVarChemin(this)" id="' . $lienChemin . '" >'.$value.'</a>';
+			}
+			
+			# code...
+			break;
+		case 4:
+
+			/*$param=$_SERVER["DOCUMENT_ROOT"];*/
+			/*echo $param;*/
+			$files=scandir($param);
+			/*echo $param;*/
+
+			/*if($dossier = opendir($files)){*/
+
+				foreach ($files as $value)
+				{	
+
+					if($value != '.' && $value != '..')
+					{
+
+
+						if (strpos($value,".")===false){
+								echo '<article class="col-xs-6 col-md-3" onclick="OpenDoc(this)" id="' . $value . '"><div class="glyphicon glyphicon-folder-close" ><p class="filename" >' . $value . '</div></article>';	
+							}else {
+								$stat=stat( realpath ($param.'/'.$value));
+
+								echo '<article class="col-xs-6 col-md-3"><a class="glyphicon glyphicon-file" href="' .$param.'/'. $value. '" download=' . $value . '><p class="filename" >' . $value.'' ;	
+								if (!$stat){
+									echo ' Appel à stat() a échoué...';
+								}else{
+									echo '<div class="infoFichier"> Modif. :'.date ("F d Y H:i:s.", $stat["mtime"]).'</br>Taille. :'.$stat["size"].' octets';
+								}
+								echo'</div></p></a></article>';
+							}
+					}	 
+
+				}
+				/*closedir($dossier);*/
+			/*}else{
+				echo'Le dossier n\'a pas pu être ouvert.';
+				
+			}*/
+
+			break;
 		default:
 			# code...
 			break;

@@ -14,18 +14,33 @@
 
 </head>
 
+<script type="text/javascript">
+function noBack(){window.history.forward()}
+noBack();
+window.onload=noBack;
+window.onpageshow=function(evt){if(evt.persisted)noBack()}
+window.onunload=function(){void(0)}
+</script>
 
-<body>
+</head>
+
+
+<body onload="noBack();">
 	<header class="container">
 
-		<div class="col-xs-1">
+		<div class="col-xs-1 col-md-1">
 
 
 			<button id="test" type="button" class="btn btn-outline-info " onclick="retourParent();"> <i class="glyphicon glyphicon-menu-up"></i></button>
 		</div>
-		<div class="col-xs-11">
-			<article >
+		<div class="col-xs-11 col-md-11">
+			<article id="nav">
 
+			<nav id="barNav">
+				<!-- <a class="breadcrumb-item" href="#"> C: </a>
+				<a class="breadcrumb-item" href="#"> Folder </a>
+				<a class="breadcrumb-item" href="#"> Folder 2 </a> -->
+			</nav>
 
 
 
@@ -40,11 +55,11 @@
 
 	<section class="container" id="explorer">
 
-		<article class="col-xs-3"></article>
-		<article class="col-xs-3"></article>
-		<article class="col-xs-3"></article>
-		<article class="col-xs-3"></article>
-		<article class="col-xs-3"></article>
+	<!-- 	<article class="col-xs-6 col-md-3"><a class="glyphicon glyphicon-folder-close"></a></article>
+		<article class="col-xs-6 col-md-3"><a class="glyphicon glyphicon-file"></article>
+		<article class="col-xs-6 col-md-3"></article>
+		<article class="col-xs-6 col-md-3"></article>
+		<article class="col-xs-6 col-md-3"></article> -->
 
 
 	</section>

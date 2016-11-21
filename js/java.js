@@ -1,12 +1,11 @@
-var testet="test";
-
-
 var id="explorer";
 var chemin="..";
+var docCourant="";
 
 
 function firstInit(){
 	suppContenu();
+	
 
 	$.get('./send-ajax-data.php',{
 		param : "../" ,
@@ -21,13 +20,15 @@ function firstInit(){
         alert('Error: ' + data);
     });
     disablBouton();
+    barreNav();
 }
 
 function OpenDoc(champ){
 	suppContenu();
 	
+	
 	chemin+="/"+champ.id;
-	console.log(chemin);
+	/*console.log(chemin);*/
 	$.get('./send-ajax-data.php',{
 		param : chemin ,
 		/*$('#text').val()*/
@@ -42,25 +43,29 @@ function OpenDoc(champ){
         alert('Error: ' + data);
     });
     disablBouton();
+    barreNav();
     
 
 
 }
 
 function suppContenu(){
+	docCourant=chemin;
 	/*console.log(document.getElementById(id).innerHTML);*/
-	if (document.getElementById(id)!=null){
+	/*if (document.getElementById(id)!=null){
 		document.getElementById(id).innerHTML="";
-	}
+	}*/
 	/*document.getElementById(id).innerHTML="<article class='col-xs-3'><a href="' . $fichier . '">' . $fichier . '</a></article>";*/
 	
 }
 function retourParent(){
 	if (chemin!=".."){
 		suppContenu();
+		barreNav();
+		
 
 		
-		console.log(chemin);
+		/*console.log(chemin);*/
 		$.get('./send-ajax-data.php',{
 			param : chemin ,
 			/*$('#text').val()*/
@@ -69,6 +74,8 @@ function retourParent(){
 		})
 	    .done(function(data) {
 	        OpenRetourDoc(data);
+	        chemin=data;
+/*	        console.log(chemin);*/
 	       	/*document.getElementById(id).innerHTML=data;*/
 	    })
 	    .fail(function(data) {
@@ -76,12 +83,13 @@ function retourParent(){
 	    });
 	}
 	disablBouton();
-
+	barreNav();
 
 
 }
 function OpenRetourDoc(name){
 	suppContenu();
+
 	chemin=name;
 	$.get('./send-ajax-data.php',{
 		param : name ,
@@ -97,12 +105,12 @@ function OpenRetourDoc(name){
     .fail(function(data) {
         alert('Error: ' + data);
     });
+    /*retourVarChemin();*/
 
 
 }
 function disablBouton(){
 
-	console.log(chemin);
 	if (chemin==".."){
 		document.getElementById('test').disabled  = true;
 	}else{
@@ -111,3 +119,54 @@ function disablBouton(){
 	
 }
 
+function barreNav(){
+
+	$.get('./send-ajax-data.php',{
+		param : chemin ,
+		/*$('#text').val()*/
+		fonctiAppel:3,
+
+	})
+    .done(function(data) {
+        /*alert(data);*/
+       	document.getElementById("barNav").innerHTML=data;
+
+
+    })
+    .fail(function(data) {
+        alert('Error: ' + data);
+    });
+
+}
+
+function retourVarChemin(name){
+	/*console.log(chemin);*/
+/*	tabChemin=chemin.split("/");
+	
+	for (var i = 0 ; tabChemin.length > i; i++) {
+		if(docCourant!=tabChemin[i]){
+			chemin
+		}
+	}*/
+	/*console.log(name);*/
+	chemin=name.id;
+	suppContenu();
+
+	$.get('./send-ajax-data.php',{
+		param : name.id ,
+		/*$('#text').val()*/
+		fonctiAppel:4,
+
+	})
+    .done(function(data) {
+        /*alert(data);*/
+       	document.getElementById(id).innerHTML=data;
+
+    })
+    .fail(function(data) {
+        alert('Error: ' + data);
+    });
+    disablBouton();
+	barreNav();
+
+}
