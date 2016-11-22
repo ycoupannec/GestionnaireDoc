@@ -78,9 +78,9 @@
 			# code...
 			break;
 		case 2:
-			$param=$_SERVER["DOCUMENT_ROOT"];
+			/*$param=$_SERVER["DOCUMENT_ROOT"];*/
 
-			if($dossier = opendir($param)){
+			/*if($dossier = opendir($param)){
 
 				while(false !== ($fichier = readdir($dossier)))
 				{	
@@ -110,7 +110,7 @@
 				echo'Le dossier n\'a pas pu être ouvert.';
 				
 			}
-
+*/
 		 	
 
 			# code...
@@ -120,9 +120,14 @@
 			
 			$champ = explode("/", $param);
 			$lienChemin="";
+
+			
 			foreach ($champ as $value) {
-				$lienChemin.=$value."/";
-			    echo '<a class="breadcrumb-item" onclick="retourVarChemin(this)" id="' . $lienChemin . '" >'.$value.'</a>';
+				if ($value!=""){
+						$lienChemin.=$value."/";
+			    		echo '<a class="breadcrumb-item" onclick="retourVarChemin(this)" id="' . $lienChemin . '" >'.$value.'</a>';	
+				}
+				
 			}
 			
 			# code...

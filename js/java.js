@@ -10,7 +10,7 @@ function firstInit(){
 	$.get('./send-ajax-data.php',{
 		param : "../" ,
 		/*$('#text').val()*/
-		fonctiAppel:2,
+		fonctiAppel:0,
 
 	})
     .done(function(data) {
@@ -61,11 +61,10 @@ function suppContenu(){
 function retourParent(){
 	if (chemin!=".."){
 		suppContenu();
-		barreNav();
+		/*barreNav();*/
 		
 
-		
-		/*console.log(chemin);*/
+		console.log(chemin);
 		$.get('./send-ajax-data.php',{
 			param : chemin ,
 			/*$('#text').val()*/
@@ -75,15 +74,17 @@ function retourParent(){
 	    .done(function(data) {
 	        OpenRetourDoc(data);
 	        chemin=data;
-/*	        console.log(chemin);*/
+	        disablBouton();
+			barreNav();
+	        
 	       	/*document.getElementById(id).innerHTML=data;*/
 	    })
 	    .fail(function(data) {
 	        alert('Error: ' + data);
 	    });
 	}
-	disablBouton();
-	barreNav();
+	
+	
 
 
 }
@@ -111,7 +112,7 @@ function OpenRetourDoc(name){
 }
 function disablBouton(){
 
-	if (chemin==".."){
+	if (chemin==".."||chemin=="../"){
 		document.getElementById('test').disabled  = true;
 	}else{
 		document.getElementById('test').disabled  = false;
@@ -150,6 +151,7 @@ function retourVarChemin(name){
 	}*/
 	/*console.log(name);*/
 	chemin=name.id;
+	console.log(chemin);
 	suppContenu();
 
 	$.get('./send-ajax-data.php',{
@@ -161,12 +163,13 @@ function retourVarChemin(name){
     .done(function(data) {
         /*alert(data);*/
        	document.getElementById(id).innerHTML=data;
+       	disablBouton();
+		barreNav();
 
     })
     .fail(function(data) {
         alert('Error: ' + data);
     });
-    disablBouton();
-	barreNav();
+    
 
 }
